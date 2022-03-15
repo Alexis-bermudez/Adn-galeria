@@ -40,7 +40,7 @@ public class ObraTestDataBuilder {
         return this;
     }
 
-    public ObraTestDataBuilder conVendido(boolean vendido) {
+    public ObraTestDataBuilder conVendido(Boolean vendido) {
         this.vendido = vendido;
         return this;
     }

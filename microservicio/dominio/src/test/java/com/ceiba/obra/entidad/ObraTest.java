@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-public class ObraTest {
+class ObraTest {
 
     @Test
     @DisplayName("Deberia crear correctamente la obra")
@@ -32,7 +32,7 @@ public class ObraTest {
     }
 
     @Test
-    void deberiaFallarSinNombreDeUsuario() {
+    void deberiaFallarSinTituloDeObra() {
 
         //Arrange
         ObraTestDataBuilder usuarioTestDataBuilder = new ObraTestDataBuilder().conTitulo(null).conId(1L);
@@ -44,39 +44,39 @@ public class ObraTest {
     }
 
     @Test
-    void deberiaFallarSinClave() {
+    void deberiaFallarSinTipoObra() {
 
         //Arrange
-        ObraTestDataBuilder usuarioTestDataBuilder = new ObraTestDataBuilder().conId(1L);
+        ObraTestDataBuilder usuarioTestDataBuilder = new ObraTestDataBuilder().conTipoObra(null).conId(1L);
         //act-assert
         BasePrueba.assertThrows(() -> {
                     usuarioTestDataBuilder.build();
                 },
-                ExcepcionValorObligatorio.class, "Se debe ingresar la clave");
+                ExcepcionValorObligatorio.class, "Se debe ingresar el tipo de la obra");
     }
 
     @Test
-    void deberiaFallarSinTamanioClave() {
+    void deberiaFallarSinPrecio() {
 
         //Arrange
-        ObraTestDataBuilder usuarioTestDataBuilder = new ObraTestDataBuilder().conClave("123").conId(1L);
+        ObraTestDataBuilder usuarioTestDataBuilder = new ObraTestDataBuilder().conPrecio(null).conId(1L);
         //act-assert
         BasePrueba.assertThrows(() -> {
                     usuarioTestDataBuilder.build();
                 },
-                ExcepcionLongitudValor.class, "La clave debe tener una longitud mayor o igual a 4");
+                ExcepcionValorObligatorio.class, "Se debe ingresar el precio de la obra");
     }
 
     @Test
-    void deberiaFallarSinFechaCreacion() {
+    void deberiaFallarSinVendido() {
 
         //Arrange
-        ObraTestDataBuilder usuarioTestDataBuilder = new ObraTestDataBuilder().conFechaCreacion(null).conId(1L);
+        ObraTestDataBuilder usuarioTestDataBuilder = new ObraTestDataBuilder().conVendido(null).conId(1L);
         //act-assert
         BasePrueba.assertThrows(() -> {
                     usuarioTestDataBuilder.build();
                 },
-                ExcepcionValorObligatorio.class, "Se debe ingresar la fecha de creación");
+                ExcepcionValorObligatorio.class, "Se debe ingresar si la obra fue vendida o no");
     }
 
 

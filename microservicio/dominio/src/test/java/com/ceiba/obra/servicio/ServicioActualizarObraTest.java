@@ -9,18 +9,18 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-public class ServicioActualizarObraTest {
+class ServicioActualizarObraTest {
 
     @Test
-    @DisplayName("Deberia validar la existencia previa del usuario")
-    void deberiaValidarLaExistenciaPreviaDelUsuario() {
+    @DisplayName("Deberia validar la existencia previa de la obra")
+    void deberiaValidarLaExistenciaPreviaDeLaObra() {
         // arrange
         Obra obra = new ObraTestDataBuilder().conId(1L).build();
         RepositorioObra repositorioObra = Mockito.mock(RepositorioObra.class);
         Mockito.when(repositorioObra.existePorId(Mockito.anyLong())).thenReturn(false);
         ServicioActualizarObra servicioActualizarObra = new ServicioActualizarObra(repositorioObra);
         // act - assert
-        BasePrueba.assertThrows(() -> servicioActualizarObra.ejecutar(obra), ExcepcionDuplicidad.class,"El no usuario existe en el sistema");
+        BasePrueba.assertThrows(() -> servicioActualizarObra.ejecutar(obra), ExcepcionDuplicidad.class,"La obra no existe en el sistema");
     }
 
     @Test
