@@ -42,30 +42,48 @@ pipeline {
       steps{
         echo "------------>Checkout<------------"
         checkout scm
+
+        dir("${PROJECT_PATH_BACK}") {
+            sh 'chmod +x ./gradlew'
+            sh './gradlew clean'
+          }
       }
     }
 
     stage('Compile & Unit Tests') {
-      steps{
-        echo "------------>Compile & Unit Tests<------------"
-        sh 'chmod +x gradlew'
-        sh './gradlew --b ./build.gradle test'
-      }
+       parallel {
+          stage('Test- Backend'){
+             steps {
+                echo '------------>Test Backend<------------'
+                dir("${PROJECT_PATH_BACK}"){
+                    sh 'chmod +x gradlew'
+                    sh './gradlew --b ./build.gradle test'
+                  }
+              }
+             post{
+                always {
+                    junit '**/build/test-results/test/*.xml' //Configuración de los reportes de JUnit
+                }
+             }
+          }
+       }
     }
 
     stage('Static Code Analysis') {
       steps{
         echo '------------>Análisis de código estático<------------'
-        sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn:[galeria-bryan.guzman]',
-                sonarName:'CeibaADN-Galeria(bryan.guzman)',
-                sonarPathProperties:'./sonar-project.properties')
+            sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn:[galeria-bryan.guzman]',
+            sonarName:'CeibaADN-Galeria(bryan.guzman)',
+            sonarPathProperties:'./sonar-project.properties')
       }
     }
 
     stage('Build') {
       steps {
         echo "------------>Build<------------"
-        sh './gradlew --b ./build.gradle build -x test'
+        sh 'chmod +x ./presupuesto/gradlew'
+        sh './presupuesto/gradlew --b ./presupuesto/build.gradle clean'
+        sh './presupuesto/gradlew --b ./presupuesto/build.gradle build -x test'
       }
     }
   }
@@ -80,7 +98,9 @@ pipeline {
     }
     failure {
       echo 'This will run only if failed'
-      mail (to: 'bryan.guzman@ceiba.com.co',subject: "Failed Pipeline:${currentBuild.fullDisplayName}",body: "Something is wrong with ${env.BUILD_URL}")
+      mail (to: 'bryan.guzman@ceiba.com.co',
+            subject: "Failed Pipeline:${currentBuild.fullDisplayName}",
+            body: "Build failed in Jenkins: Project: ${env.JOB_NAME} Build /n Number: ${env.BUILD_NUMBER} URL de build: ${env.BUILD_NUMBER}/n/nPlease go to ${env.BUILD_URL} and verify the build")
     }
     unstable {
       echo 'This will run only if the run was marked as unstable'
