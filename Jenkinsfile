@@ -13,7 +13,7 @@ pipeline {
   }
 
   environment {
-    PROJECT_PATH_BACK = 'presupuesto'
+    PROJECT_PATH_BACK = 'microservicio'
   }
 
   triggers {
