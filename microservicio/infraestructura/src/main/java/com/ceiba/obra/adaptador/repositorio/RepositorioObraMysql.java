@@ -1,39 +1,39 @@
-package com.ceiba.usuario.adaptador.repositorio;
+package com.ceiba.obra.adaptador.repositorio;
 
 import com.ceiba.infraestructura.jdbc.CustomNamedParameterJdbcTemplate;
 import com.ceiba.infraestructura.jdbc.sqlstatement.SqlStatement;
-import com.ceiba.usuario.modelo.entidad.Usuario;
-import com.ceiba.usuario.puerto.repositorio.RepositorioUsuario;
+import com.ceiba.obra.modelo.entidad.Obra;
+import com.ceiba.obra.puerto.repositorio.RepositorioObra;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class RepositorioUsuarioMysql implements RepositorioUsuario {
+public class RepositorioObraMysql implements RepositorioObra {
 
     private final CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate;
 
-    @SqlStatement(namespace="usuario", value="crear")
+    @SqlStatement(namespace="obra", value="crear")
     private static String sqlCrear;
 
-    @SqlStatement(namespace="usuario", value="actualizar")
+    @SqlStatement(namespace="obra", value="actualizar")
     private static String sqlActualizar;
 
-    @SqlStatement(namespace="usuario", value="eliminar")
+    @SqlStatement(namespace="obra", value="eliminar")
     private static String sqlEliminar;
 
-    @SqlStatement(namespace="usuario", value="existe")
+    @SqlStatement(namespace="obra", value="existe")
     private static String sqlExiste;
 
-    @SqlStatement(namespace="usuario", value="existePorId")
+    @SqlStatement(namespace="obra", value="existePorId")
     private static String sqlExistePorId;
 
-    public RepositorioUsuarioMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
+    public RepositorioObraMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
         this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
     }
 
     @Override
-    public Long crear(Usuario usuario) {
-        return this.customNamedParameterJdbcTemplate.crear(usuario, sqlCrear);
+    public Long crear(Obra obra) {
+        return this.customNamedParameterJdbcTemplate.crear(obra, sqlCrear);
     }
 
     @Override
@@ -45,16 +45,16 @@ public class RepositorioUsuarioMysql implements RepositorioUsuario {
     }
 
     @Override
-    public boolean existe(String nombre) {
+    public boolean existe(String titulo) {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("nombre", nombre);
+        paramSource.addValue("titulo", titulo);
 
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExiste,paramSource, Boolean.class);
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExiste, paramSource, Boolean.class);
     }
 
     @Override
-    public void actualizar(Usuario usuario) {
-        this.customNamedParameterJdbcTemplate.actualizar(usuario, sqlActualizar);
+    public void actualizar(Obra obra) {
+        this.customNamedParameterJdbcTemplate.actualizar(obra, sqlActualizar);
     }
 
     @Override

@@ -1,0 +1,1 @@
+select count(1) from obra where titulo = :titulo

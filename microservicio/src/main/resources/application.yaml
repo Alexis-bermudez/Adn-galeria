@@ -6,7 +6,7 @@ jasypt:
 server:
    port: 8080
    servlet:
-      context-path: /galeria
+      context-path: /microservicio
       session:
          timeout: 21600s
 
@@ -16,6 +16,6 @@ spring:
       type: com.zaxxer.hikari.HikariDataSource
       jdbcUrl: jdbc:h2:mem:galeria
       username: sa
-      password: 
+      password:
       hikari:
          poolName: pool

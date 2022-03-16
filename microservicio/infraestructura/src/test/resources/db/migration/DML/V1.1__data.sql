@@ -1,1 +1,1 @@
-insert into usuario(id, nombre,clave,fecha_creacion) values(1,'test','1234',now())
+insert into obra (id, titulo, tipoObra, precio, vendido) values(1, 'La Gioconda', 'REALISTA', 3600000, false);

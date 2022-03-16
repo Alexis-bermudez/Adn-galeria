@@ -1,4 +1,4 @@
-package com.ceiba.usuario.controlador;
+package com.ceiba.obra.controlador;
 
 import com.ceiba.ApplicationMock;
 import org.junit.jupiter.api.DisplayName;
@@ -19,20 +19,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(ConsultaControladorUsuario.class)
+@WebMvcTest(ConsultaControladorObra.class)
 @ContextConfiguration(classes= ApplicationMock.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-class ConsultaControladorUsuarioTest {
+class ConsultaControladorObraTest {
 
     @Autowired
     private MockMvc mocMvc;
 
     @Test
-    @DisplayName("Deberia listar usuarios")
-    void deberiaListarUsuarios() throws Exception {
+    @DisplayName("Deberia listar obras")
+    void deberiaListarObras() throws Exception {
         // arrange
         // act - assert
-        mocMvc.perform(get("/usuarios")
+        mocMvc.perform(get("/obras")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))

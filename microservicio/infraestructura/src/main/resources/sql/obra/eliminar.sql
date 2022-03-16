@@ -1,3 +1,3 @@
 delete 
-from usuario
+from obra
 where id = :id

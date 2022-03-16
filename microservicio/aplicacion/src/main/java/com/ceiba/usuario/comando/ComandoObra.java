@@ -1,7 +1,6 @@
 package com.ceiba.usuario.comando;
 
-import java.time.LocalDateTime;
-
+import com.ceiba.obra.modelo.entidad.TipoObra;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,10 +10,11 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ComandoUsuario{
+public class ComandoObra {
 
     private Long id;
-    private String nombre;
-    private String clave;
-    private LocalDateTime fecha;
+    private String titulo;
+    private TipoObra tipoObra;
+    private Long precio;
+    private Boolean vendido;
 }

@@ -99,6 +99,6 @@ dependencies {
 
 bootJar {
 	mainClassName = 'com.ceiba.Application'
-    baseName = 'galeria'
+    baseName = 'microservicio'
     version =  version
 }
