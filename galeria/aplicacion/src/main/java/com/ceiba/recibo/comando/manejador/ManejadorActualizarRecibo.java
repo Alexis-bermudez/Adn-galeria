@@ -18,8 +18,8 @@ public class ManejadorActualizarRecibo implements ManejadorComando<ComandoRecibo
         this.servicioActualizarRecibo = servicioActualizarRecibo;
     }
 
-    public void ejecutar(ComandoRecibo comandoObra) {
-        Recibo recibo = this.fabricaRecibo.crear(comandoObra);
+    public void ejecutar(ComandoRecibo comandoRecibo) {
+        Recibo recibo = this.fabricaRecibo.crear(comandoRecibo);
         this.servicioActualizarRecibo.ejecutar(recibo);
     }
 }

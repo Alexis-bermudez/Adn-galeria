@@ -1,8 +1,8 @@
-package com.ceiba.obra.controlador;
+package com.ceiba.recibo.controlador;
 
 import com.ceiba.ApplicationMock;
-import com.ceiba.obra.comando.ComandoObra;
-import com.ceiba.obra.servicio.testdatabuilder.ComandoObraTestDataBuilder;
+import com.ceiba.recibo.comando.ComandoRecibo;
+import com.ceiba.recibo.servicio.testdatabuilder.ComandoReciboTestDataBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,10 +20,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(ComandoControladorObra.class)
+@WebMvcTest(ComandoControladorRecibo.class)
 @ContextConfiguration(classes= ApplicationMock.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-class ComandoControladorObraTest {
+class ComandoControladorReciboTest {
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -32,43 +32,43 @@ class ComandoControladorObraTest {
     private MockMvc mocMvc;
 
     @Test
-    @DisplayName("Deberia crear una obra")
-    void deberiaCrearUnaObra() throws Exception{
+    @DisplayName("Deberia crear un recibo")
+    void deberiaCrearUnRecibo() throws Exception{
         // arrange
-        ComandoObra obra = new ComandoObraTestDataBuilder().build();
+        ComandoRecibo recibo = new ComandoReciboTestDataBuilder().build();
         // act - assert
-        mocMvc.perform(post("/obras")
+        mocMvc.perform(post("/recibos")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(obra)))
+                        .content(objectMapper.writeValueAsString(recibo)))
                 .andExpect(status().isOk())
                 .andExpect(content().json("{'valor': 2}"));
     }
 
     @Test
-    @DisplayName("Deberia actualizar una obra")
-    void deberiaActualizarUnaObra() throws Exception{
+    @DisplayName("Deberia actualizar un recibo")
+    void deberiaActualizarUnRecibo() throws Exception{
         // arrange
         Long id = 1L;
-        ComandoObra obra = new ComandoObraTestDataBuilder().build();
+        ComandoRecibo recibo = new ComandoReciboTestDataBuilder().build();
         // act - assert
-        mocMvc.perform(put("/obras/{id}",id)
+        mocMvc.perform(put("/recibos/{id}",id)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(obra)))
+                        .content(objectMapper.writeValueAsString(recibo)))
                 .andExpect(status().isOk());
     }
 
     @Test
-    @DisplayName("Deberia eliminar una obra")
-    void deberiaEliminarUnaObra() throws Exception {
+    @DisplayName("Deberia eliminar un recibo")
+    void deberiaEliminarUnRecibo() throws Exception {
         // arrange
         Long id = 1L;
         // act - assert
-        mocMvc.perform(delete("/obras/{id}",id)
+        mocMvc.perform(delete("/recibos/{id}",id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        mocMvc.perform(get("/obras")
+        mocMvc.perform(get("/recibos")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(0)));
