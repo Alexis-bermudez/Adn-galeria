@@ -28,28 +28,38 @@ public class Recibo {
     public Recibo(Long id, Long total, Boolean entregaInmediata, LocalDate fechaCompra, String tipoObra, Long idObra) {
         validarObligatorio(total, SE_DEBE_INGRESAR_EL_TOTAL);
         validarObligatorio(entregaInmediata, SE_DEBE_INGRESAR_LA_ENTREGA_INMEDIATA);
-        if (fechaCompra == null) {
-            validarQueNoSeaSabado(LocalDate.now(), NO_SE_PUEDE_VENDER_LOS_DIAS_SABADOS);
-        } else { validarQueNoSeaSabado(fechaCompra, NO_SE_PUEDE_VENDER_LOS_DIAS_SABADOS); }
+        validarQueNoSeaSabado(fechaCompra, NO_SE_PUEDE_VENDER_LOS_DIAS_SABADOS);
         validarObligatorio(tipoObra, SE_DEBE_INGRESAR_EL_TIPO_DE_OBRA);
         validarTipoObra(tipoObra, TIPO_DE_OBRA_NO_ADMITIDO);
         validarObligatorio(idObra, SE_DEBE_INGRESAR_EL_ID_DE_LA_OBRA_VENDIDA);
 
         this.id = id;
-        if ("REALISMO".equals(tipoObra)){
-            this.total = entregaInmediata.booleanValue() ? (long)(total.doubleValue()*1.10) : total;
-            this.fechaEntrega = entregaInmediata.booleanValue() ? LocalDate.now() : LocalDate.now().plusDays(15);
-        } else if ("SURREALISTA".equals(tipoObra)) {
-            this.total = entregaInmediata.booleanValue() ? (long)(total.doubleValue()*1.07) : total;
-            this.fechaEntrega = entregaInmediata.booleanValue() ? LocalDate.now() : LocalDate.now().plusDays(10);
-        } else if ("ABSTRACTO".equals(tipoObra)) {
-            this.total = entregaInmediata.booleanValue() ? (long)(total.doubleValue()*1.05) : total;
-            this.fechaEntrega = entregaInmediata.booleanValue() ? LocalDate.now() : LocalDate.now().plusDays(7);
-        }
+        validarFechaEntrega(entregaInmediata, fechaCompra);
         this.entregaInmediata = entregaInmediata;
+        this.total = (long)(total*validarCostoExtra(entregaInmediata, tipoObra));
         this.fechaCompra = fechaCompra == null ? LocalDate.now() : fechaCompra;
         this.tipoObra = tipoObra;
         this.idObra = idObra;
+    }
+
+    private void validarFechaEntrega(Boolean entregaInmediata, LocalDate fechaCompra) {
+        if(entregaInmediata.booleanValue()){
+            this.fechaEntrega = fechaCompra;
+        }
+    }
+
+    private double validarCostoExtra(Boolean entregaInmediata, String tipoObra) {
+        if(entregaInmediata.booleanValue()){
+            if ("REALISMO".equals(tipoObra)){
+                return 1.10;
+            } else if ("SURREALISTA".equals(tipoObra)) {
+                return 1.07;
+            } else {
+                return 1.05;
+            }
+        } else {
+            return 1;
+        }
     }
 
 }

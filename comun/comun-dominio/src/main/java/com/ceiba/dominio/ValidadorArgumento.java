@@ -109,6 +109,7 @@ public class ValidadorArgumento {
     }
 
     public static void validarQueNoSeaSabado(LocalDate fecha, String mensaje){
+        if (fecha == null) { fecha = LocalDate.now(); }
         if(fecha.getDayOfWeek() == DayOfWeek.SATURDAY){
             throw new ExcepcionValorInvalido(mensaje);
         }
