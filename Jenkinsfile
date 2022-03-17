@@ -83,8 +83,8 @@ pipeline{
 		stage('Static Code Analysis')
 		{
 			steps{
-                sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn:[galeria-bryan.guzman]',
-                sonarName:'CeibaADN-Galeria(bryan.guzman)',
+                sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn:galeria-bryan.guzman',
+                sonarName:'CeibaADN-Galeria-bryan.guzman',
                 sonarPathProperties:'./sonar-project.properties')
                 }
 		}
