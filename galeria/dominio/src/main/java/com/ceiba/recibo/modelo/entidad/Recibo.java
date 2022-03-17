@@ -36,13 +36,13 @@ public class Recibo {
         validarObligatorio(idObra, SE_DEBE_INGRESAR_EL_ID_DE_LA_OBRA_VENDIDA);
 
         this.id = id;
-        if (tipoObra.equals("REALISMO")){
+        if ("REALISMO".equals(tipoObra)){
             this.total = entregaInmediata.booleanValue() ? (long)(total.doubleValue()*1.10) : total;
             this.fechaEntrega = entregaInmediata.booleanValue() ? LocalDate.now() : LocalDate.now().plusDays(15);
-        } else if (tipoObra.equals("SURREALISTA")) {
+        } else if ("SURREALISTA".equals(tipoObra)) {
             this.total = entregaInmediata.booleanValue() ? (long)(total.doubleValue()*1.07) : total;
             this.fechaEntrega = entregaInmediata.booleanValue() ? LocalDate.now() : LocalDate.now().plusDays(10);
-        } else if (tipoObra.equals("ABSTRACTO")) {
+        } else if ("ABSTRACTO".equals(tipoObra)) {
             this.total = entregaInmediata.booleanValue() ? (long)(total.doubleValue()*1.05) : total;
             this.fechaEntrega = entregaInmediata.booleanValue() ? LocalDate.now() : LocalDate.now().plusDays(7);
         }

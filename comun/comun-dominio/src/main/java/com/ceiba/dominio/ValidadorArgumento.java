@@ -103,7 +103,7 @@ public class ValidadorArgumento {
     }
 
     public static void validarTipoObra(String tipoObra, String mensaje) {
-        if (!(tipoObra.equals("REALISMO") || tipoObra.equals("SURREALISTA") || tipoObra.equals("ABSTRACTO"))){
+        if (!("ABSTRACTO".equals(tipoObra) || "REALISMO".equals(tipoObra) || "SURREALISTA".equals(tipoObra))){
             throw new ExcepcionValorInvalido(mensaje);
         }
     }
