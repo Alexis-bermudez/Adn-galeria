@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 public class ReciboTest {
 
     @Test
-    @DisplayName("Deberia crear correctamente la obra")
+    @DisplayName("Deberia crear correctamente el recibo")
     void deberiaCrearCorrectamenteLaObra() {
         // arrange
 
@@ -27,8 +27,8 @@ public class ReciboTest {
         assertEquals(1, recibo.getId());
         assertEquals(3600000, recibo.getTotal());
         assertFalse(recibo.getEntregaInmediata());
-        assertEquals(LocalDate.of(2022, 3, 16), recibo.getFechaCompra());
-        assertEquals(LocalDate.of(2022, 3, 16).plusDays(15), recibo.getFechaEntrega());
+        assertEquals(LocalDate.now(), recibo.getFechaCompra());
+        assertEquals(LocalDate.now().plusDays(15), recibo.getFechaEntrega());
         assertEquals(1, recibo.getIdObra());
     }
 
