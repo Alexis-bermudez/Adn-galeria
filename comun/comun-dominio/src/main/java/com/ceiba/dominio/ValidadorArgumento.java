@@ -1,5 +1,7 @@
 package com.ceiba.dominio;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -18,6 +20,18 @@ public class ValidadorArgumento {
     public static void validarObligatorio(Object valor, String mensaje) {
         if (valor == null) {
             throw new ExcepcionValorObligatorio(mensaje);
+        }
+    }
+
+    public static void validarLongitudMaxima(String valor,int longitud,String mensaje){
+        if(valor.length() > longitud){
+            throw new ExcepcionLongitudValor(mensaje);
+        }
+    }
+
+    public static void validarLongitudMaxima(Long valor,int longitud,String mensaje){
+        if(String.valueOf(valor).length() > longitud){
+            throw new ExcepcionLongitudValor(mensaje);
         }
     }
     
@@ -72,6 +86,7 @@ public class ValidadorArgumento {
         }
     }
 
+
     public static <E extends Enum<E>> E validarValido(String valor, Class<E> enumAObtener, String mensaje) {
         E enumObtenido = null;
         if(null != valor) {
@@ -85,6 +100,18 @@ public class ValidadorArgumento {
             }
         }
         return enumObtenido;
+    }
+
+    public static void validarTipoObra(String tipoObra, String mensaje) {
+        if (!(tipoObra.equals("REALISMO") || tipoObra.equals("SURREALISTA") || tipoObra.equals("ABSTRACTO"))){
+            throw new ExcepcionValorInvalido(mensaje);
+        }
+    }
+
+    public static void validarQueNoSeaSabado(LocalDate fecha, String mensaje){
+        if(fecha.getDayOfWeek() == DayOfWeek.SATURDAY){
+            throw new ExcepcionValorInvalido(mensaje);
+        }
     }
 
     public static void validarNumerico(String valor,String mensaje) {

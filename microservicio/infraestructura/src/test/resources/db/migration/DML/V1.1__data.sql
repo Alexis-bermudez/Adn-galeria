@@ -1,1 +1,0 @@
-insert into obra (id, titulo, tipoObra, precio, vendido) values(1, 'La Gioconda', 'REALISTA', 3600000, false);

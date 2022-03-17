@@ -1,0 +1,1 @@
+insert into obra(titulo, tipo_obra, precio, vendido) values (:titulo, :tipoObra, :precio, :vendido)
