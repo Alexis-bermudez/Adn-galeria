@@ -28,7 +28,9 @@ public class Recibo {
     public Recibo(Long id, Long total, Boolean entregaInmediata, LocalDate fechaCompra, String tipoObra, Long idObra) {
         validarObligatorio(total, SE_DEBE_INGRESAR_EL_TOTAL);
         validarObligatorio(entregaInmediata, SE_DEBE_INGRESAR_LA_ENTREGA_INMEDIATA);
-        if (fechaCompra == null) { fechaCompra = LocalDate.now(); }
+        if (fechaCompra == null) {
+            fechaCompra = LocalDate.now();
+        }
         validarQueNoSeaSabado(fechaCompra, NO_SE_PUEDE_VENDER_LOS_DIAS_SABADOS);
         validarObligatorio(tipoObra, SE_DEBE_INGRESAR_EL_TIPO_DE_OBRA);
         validarTipoObra(tipoObra, TIPO_DE_OBRA_NO_ADMITIDO);
