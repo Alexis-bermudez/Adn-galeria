@@ -10,8 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ReciboTest {
 
@@ -29,6 +28,24 @@ public class ReciboTest {
         assertFalse(recibo.getEntregaInmediata());
         assertEquals(LocalDate.now(), recibo.getFechaCompra());
         assertEquals(LocalDate.now().plusDays(15), recibo.getFechaEntrega());
+        assertEquals("REALISMO", recibo.getTipoObra());
+        assertEquals(1, recibo.getIdObra());
+    }
+
+    @Test
+    @DisplayName("Deberia crear correctamente el recibo para obra de realismo con entrega inmediata")
+    void deberiaCrearCorrectamenteElReciboDeRealismoConEntregaInmediata() {
+        // arrange
+
+        //act
+        Recibo recibo = new ReciboTestDataBuilder().conTipoObra("REALISMO").conEntregaInmediata(true).conId(1L).build();
+
+        //assert
+        assertEquals(1, recibo.getId());
+        assertEquals((long)(3600000*1.1), recibo.getTotal());
+        assertTrue(recibo.getEntregaInmediata());
+        assertEquals(LocalDate.now(), recibo.getFechaCompra());
+        assertEquals(LocalDate.now(), recibo.getFechaEntrega());
         assertEquals("REALISMO", recibo.getTipoObra());
         assertEquals(1, recibo.getIdObra());
     }
@@ -52,6 +69,24 @@ public class ReciboTest {
     }
 
     @Test
+    @DisplayName("Deberia crear correctamente el recibo para obra de surrealismo con entrega inmediata")
+    void deberiaCrearCorrectamenteElReciboDeSurrealismoConEntregaInmediata() {
+        // arrange
+
+        //act
+        Recibo recibo = new ReciboTestDataBuilder().conTipoObra("SURREALISMO").conEntregaInmediata(true).conId(1L).build();
+
+        //assert
+        assertEquals(1, recibo.getId());
+        assertEquals((long)(3600000*1.07), recibo.getTotal());
+        assertTrue(recibo.getEntregaInmediata());
+        assertEquals(LocalDate.now(), recibo.getFechaCompra());
+        assertEquals(LocalDate.now(), recibo.getFechaEntrega());
+        assertEquals("SURREALISMO", recibo.getTipoObra());
+        assertEquals(1, recibo.getIdObra());
+    }
+
+    @Test
     @DisplayName("Deberia crear correctamente el recibo para obra abstracto")
     void deberiaCrearCorrectamenteElReciboDeAbstracto() {
         // arrange
@@ -65,6 +100,24 @@ public class ReciboTest {
         assertFalse(recibo.getEntregaInmediata());
         assertEquals(LocalDate.now(), recibo.getFechaCompra());
         assertEquals(LocalDate.now().plusDays(7), recibo.getFechaEntrega());
+        assertEquals("ABSTRACTO", recibo.getTipoObra());
+        assertEquals(1, recibo.getIdObra());
+    }
+
+    @Test
+    @DisplayName("Deberia crear correctamente el recibo para obra de abstracto con entrega inmediata")
+    void deberiaCrearCorrectamenteElReciboDeAbstractoConEntregaInmediata() {
+        // arrange
+
+        //act
+        Recibo recibo = new ReciboTestDataBuilder().conTipoObra("ABSTRACTO").conEntregaInmediata(true).conId(1L).build();
+
+        //assert
+        assertEquals(1, recibo.getId());
+        assertEquals((long)(3600000*1.05), recibo.getTotal());
+        assertTrue(recibo.getEntregaInmediata());
+        assertEquals(LocalDate.now(), recibo.getFechaCompra());
+        assertEquals(LocalDate.now(), recibo.getFechaEntrega());
         assertEquals("ABSTRACTO", recibo.getTipoObra());
         assertEquals(1, recibo.getIdObra());
     }
