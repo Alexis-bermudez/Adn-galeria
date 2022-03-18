@@ -18,7 +18,7 @@ public class ReciboTestDataBuilder {
     public ReciboTestDataBuilder() {
         total = 3600000L;
         entregaInmediata = false;
-        fechaCompra = null;
+        fechaCompra = LocalDate.now();
         tipoObra = "REALISMO";
         idObra = 1L;
     }

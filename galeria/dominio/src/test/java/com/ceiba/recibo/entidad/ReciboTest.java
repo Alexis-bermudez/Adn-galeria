@@ -16,8 +16,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 public class ReciboTest {
 
     @Test
-    @DisplayName("Deberia crear correctamente el recibo")
-    void deberiaCrearCorrectamenteLaObra() {
+    @DisplayName("Deberia crear correctamente el recibo para obra de realismo")
+    void deberiaCrearCorrectamenteElReciboDeRealismo() {
         // arrange
 
         //act
@@ -29,6 +29,43 @@ public class ReciboTest {
         assertFalse(recibo.getEntregaInmediata());
         assertEquals(LocalDate.now(), recibo.getFechaCompra());
         assertEquals(LocalDate.now().plusDays(15), recibo.getFechaEntrega());
+        assertEquals("REALISMO", recibo.getTipoObra());
+        assertEquals(1, recibo.getIdObra());
+    }
+
+    @Test
+    @DisplayName("Deberia crear correctamente el recibo para obra de surrealismo")
+    void deberiaCrearCorrectamenteElReciboDeSurrealismo() {
+        // arrange
+
+        //act
+        Recibo recibo = new ReciboTestDataBuilder().conTipoObra("SURREALISMO").conId(1L).build();
+
+        //assert
+        assertEquals(1, recibo.getId());
+        assertEquals(3600000, recibo.getTotal());
+        assertFalse(recibo.getEntregaInmediata());
+        assertEquals(LocalDate.now(), recibo.getFechaCompra());
+        assertEquals(LocalDate.now().plusDays(10), recibo.getFechaEntrega());
+        assertEquals("SURREALISMO", recibo.getTipoObra());
+        assertEquals(1, recibo.getIdObra());
+    }
+
+    @Test
+    @DisplayName("Deberia crear correctamente el recibo para obra abstracto")
+    void deberiaCrearCorrectamenteElReciboDeAbstracto() {
+        // arrange
+
+        //act
+        Recibo recibo = new ReciboTestDataBuilder().conTipoObra("ABSTRACTO").conId(1L).build();
+
+        //assert
+        assertEquals(1, recibo.getId());
+        assertEquals(3600000, recibo.getTotal());
+        assertFalse(recibo.getEntregaInmediata());
+        assertEquals(LocalDate.now(), recibo.getFechaCompra());
+        assertEquals(LocalDate.now().plusDays(7), recibo.getFechaEntrega());
+        assertEquals("ABSTRACTO", recibo.getTipoObra());
         assertEquals(1, recibo.getIdObra());
     }
 
@@ -69,6 +106,18 @@ public class ReciboTest {
     }
 
     @Test
+    void deberiaFallarSinIdObraVendida() {
+
+        //Arrange
+        ReciboTestDataBuilder reciboTestDataBuilder = new ReciboTestDataBuilder().conIdObra(null).conId(1L);
+        //act-assert
+        BasePrueba.assertThrows(() -> {
+                    reciboTestDataBuilder.build();
+                },
+                ExcepcionValorObligatorio.class, "Se debe ingresar el id de la obra vendida");
+    }
+
+    @Test
     void deberiaFallarConTipoDeObraDistintoARealismoSurrealismoAbstracto() {
 
         //Arrange
@@ -85,7 +134,7 @@ public class ReciboTest {
     void deberiaCrearReciboSinEntregaInmediataYSinCobroExtra() {
 
         //Arrange
-        ReciboTestDataBuilder reciboTestDataBuilder = new ReciboTestDataBuilder().conTipoObra("REALISMO").conEntregaInmediata(false).conId(1L);
+        ReciboTestDataBuilder reciboTestDataBuilder = new ReciboTestDataBuilder().conEntregaInmediata(false).conId(1L);
         //act
         Recibo recibo = reciboTestDataBuilder.build();
         //assert
@@ -119,17 +168,5 @@ public class ReciboTest {
                     reciboTestDataBuilder.build();
                 },
                 ExcepcionValorInvalido.class, "No se puede vender los días sábados");
-    }
-
-    @Test
-    void deberiaFallarSinIdObraVendida() {
-
-        //Arrange
-        ReciboTestDataBuilder reciboTestDataBuilder = new ReciboTestDataBuilder().conIdObra(null).conId(1L);
-        //act-assert
-        BasePrueba.assertThrows(() -> {
-                    reciboTestDataBuilder.build();
-                },
-                ExcepcionValorObligatorio.class, "Se debe ingresar el id de la obra vendida");
     }
 }

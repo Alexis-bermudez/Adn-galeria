@@ -46,7 +46,7 @@ public class Recibo {
     }
 
     private Long setTotal(Boolean entregaInmediata, Long total, String tipoObra) {
-        if (!(entregaInmediata.booleanValue())) {
+        if (!(entregaInmediata)) {
             return total;
         }
         if ("REALISMO".equals(tipoObra)) {
@@ -62,7 +62,7 @@ public class Recibo {
     }
 
     private LocalDate setFechaEntrega(Boolean entregaInmediata, LocalDate fechaCompra, String tipoObra) {
-        if (entregaInmediata.booleanValue()) {
+        if (entregaInmediata) {
             return fechaCompra;
         }
         if ("REALISMO".equals(tipoObra)) {
