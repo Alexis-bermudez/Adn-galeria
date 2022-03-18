@@ -94,6 +94,24 @@ public class ReciboTest {
     }
 
     @Test
+    @DisplayName("Deberia crear correctamente el recibo para obra de surrealismo")
+    void deberiaCambiarFechaCompraNulaAFechaActual() {
+        // arrange
+
+        //act
+        Recibo recibo = new ReciboTestDataBuilder().conFechaCompra(null).conTipoObra("SURREALISMO").conId(1L).build();
+
+        //assert
+        assertEquals(1, recibo.getId());
+        assertEquals(3600000, recibo.getTotal());
+        assertFalse(recibo.getEntregaInmediata());
+        assertEquals(LocalDate.now(), recibo.getFechaCompra());
+        assertEquals(LocalDate.now().plusDays(10), recibo.getFechaEntrega());
+        assertEquals("SURREALISMO", recibo.getTipoObra());
+        assertEquals(1, recibo.getIdObra());
+    }
+
+    @Test
     void deberiaFallarSinTipoObra() {
 
         //Arrange
