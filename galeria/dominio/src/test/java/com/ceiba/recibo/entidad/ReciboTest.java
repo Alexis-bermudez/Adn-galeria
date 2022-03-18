@@ -85,7 +85,7 @@ public class ReciboTest {
     void deberiaCrearReciboSinEntregaInmediataYSinCobroExtra() {
 
         //Arrange
-        ReciboTestDataBuilder reciboTestDataBuilder = new ReciboTestDataBuilder().conEntregaInmediata(false).conId(1L);
+        ReciboTestDataBuilder reciboTestDataBuilder = new ReciboTestDataBuilder().conTipoObra("REALISMO").conEntregaInmediata(false).conId(1L);
         //act
         Recibo recibo = reciboTestDataBuilder.build();
         //assert

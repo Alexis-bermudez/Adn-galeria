@@ -71,10 +71,7 @@ public class Recibo {
         if ("SURREALISMO".equals(tipoObra)) {
             return fechaCompra.plusDays(10);
         }
-        if ("ABSTRACTO".equals(tipoObra)) {
-            return fechaCompra.plusDays(7);
-        }
-        return null;
+        return fechaCompra.plusDays(7);
     }
 
 }
