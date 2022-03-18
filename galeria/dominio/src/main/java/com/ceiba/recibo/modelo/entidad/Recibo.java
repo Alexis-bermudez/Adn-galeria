@@ -37,20 +37,44 @@ public class Recibo {
         validarObligatorio(idObra, SE_DEBE_INGRESAR_EL_ID_DE_LA_OBRA_VENDIDA);
 
         this.id = id;
-        if ("REALISMO".equals(tipoObra)){
-            this.total = entregaInmediata.booleanValue() ? (long)(total.doubleValue()*1.10) : total;
-            this.fechaEntrega = entregaInmediata.booleanValue() ? LocalDate.now() : LocalDate.now().plusDays(15);
-        } else if ("SURREALISTA".equals(tipoObra)) {
-            this.total = entregaInmediata.booleanValue() ? (long)(total.doubleValue()*1.07) : total;
-            this.fechaEntrega = entregaInmediata.booleanValue() ? LocalDate.now() : LocalDate.now().plusDays(10);
-        } else {
-            this.total = entregaInmediata.booleanValue() ? (long)(total.doubleValue()*1.05) : total;
-            this.fechaEntrega = entregaInmediata.booleanValue() ? LocalDate.now() : LocalDate.now().plusDays(7);
-        }
+        this.total = setTotal(entregaInmediata, total, tipoObra);
+        this.fechaEntrega = setFechaEntrega(entregaInmediata, fechaCompra, tipoObra);
         this.entregaInmediata = entregaInmediata;
         this.fechaCompra = fechaCompra;
         this.tipoObra = tipoObra;
         this.idObra = idObra;
+    }
+
+    private Long setTotal(Boolean entregaInmediata, Long total, String tipoObra) {
+        if (!(entregaInmediata.booleanValue())) {
+            return total;
+        }
+        if ("REALISMO".equals(tipoObra)) {
+            return (long)(total.doubleValue()*1.1);
+        }
+        if ("SURREALISMO".equals(tipoObra)) {
+            return (long)(total.doubleValue()*1.07);
+        }
+        if ("ABSTRACTO".equals(tipoObra)) {
+            return (long)(total.doubleValue()*1.05);
+        }
+        return null;
+    }
+
+    private LocalDate setFechaEntrega(Boolean entregaInmediata, LocalDate fechaCompra, String tipoObra) {
+        if (entregaInmediata.booleanValue()) {
+            return fechaCompra;
+        }
+        if ("REALISMO".equals(tipoObra)) {
+            return fechaCompra.plusDays(15);
+        }
+        if ("SURREALISMO".equals(tipoObra)) {
+            return fechaCompra.plusDays(10);
+        }
+        if ("ABSTRACTO".equals(tipoObra)) {
+            return fechaCompra.plusDays(7);
+        }
+        return null;
     }
 
 }
