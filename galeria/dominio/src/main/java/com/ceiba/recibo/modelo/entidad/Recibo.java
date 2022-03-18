@@ -54,11 +54,9 @@ public class Recibo {
         }
         if ("SURREALISMO".equals(tipoObra)) {
             return (long)(total.doubleValue()*1.07);
+        } else {
+            return (long) (total.doubleValue() * 1.05);
         }
-        if ("ABSTRACTO".equals(tipoObra)) {
-            return (long)(total.doubleValue()*1.05);
-        }
-        return null;
     }
 
     private LocalDate setFechaEntrega(Boolean entregaInmediata, LocalDate fechaCompra, String tipoObra) {
