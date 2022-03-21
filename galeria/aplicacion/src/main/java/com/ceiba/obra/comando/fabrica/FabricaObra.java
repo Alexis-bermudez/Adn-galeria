@@ -11,7 +11,7 @@ public class FabricaObra {
         return new Obra(
                 comandoObra.getId(),
                 comandoObra.getTitulo(),
-                comandoObra.getTipoObra(),
+                comandoObra.getTipoObra().toString(),
                 comandoObra.getPrecio(),
                 comandoObra.getVendido()
         );

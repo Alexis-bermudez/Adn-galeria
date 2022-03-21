@@ -1,5 +1,6 @@
 package com.ceiba.obra.comando;
 
+import com.ceiba.obra.modelo.dto.TipoObra;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ public class ComandoObra {
 
     private Long id;
     private String titulo;
-    private String tipoObra;
+    private TipoObra tipoObra;
     private Long precio;
     private Boolean vendido;
 }

@@ -11,10 +11,4 @@ public interface DaoObra {
      * @return las obras
      */
     List<DtoObra> listar();
-
-    /**
-     * Permite obtener la obra vendida en el recibo
-     * @return la obra vendida
-     */
-    DtoObra obtenerObraVendida(Long id);
 }
