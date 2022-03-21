@@ -2,6 +2,7 @@ package com.ceiba.obra.entidad;
 
 import com.ceiba.BasePrueba;
 import com.ceiba.dominio.excepcion.ExcepcionValorObligatorio;
+import com.ceiba.obra.modelo.dto.TipoObra;
 import com.ceiba.obra.modelo.entidad.Obra;
 import com.ceiba.obra.servicio.testdatabuilder.ObraTestDataBuilder;
 import org.junit.jupiter.api.DisplayName;
@@ -22,8 +23,8 @@ class ObraTest {
         //assert
         assertEquals(1, obra.getId());
         assertEquals("La Gioconda", obra.getTitulo());
-        assertEquals("REALISMO", obra.getTipoObra());
-        assertEquals(3400000L, obra.getPrecio());
+        assertEquals(TipoObra.REALISMO.toString(), obra.getTipoObra());
+        assertEquals(3600000, obra.getPrecio());
         assertFalse(obra.getVendido());
     }
 

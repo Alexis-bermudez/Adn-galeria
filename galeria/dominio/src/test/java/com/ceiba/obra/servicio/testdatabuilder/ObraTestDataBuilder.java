@@ -1,5 +1,6 @@
 package com.ceiba.obra.servicio.testdatabuilder;
 
+import com.ceiba.obra.modelo.dto.TipoObra;
 import com.ceiba.obra.modelo.entidad.Obra;
 
 public class ObraTestDataBuilder {
@@ -12,8 +13,8 @@ public class ObraTestDataBuilder {
 
     public ObraTestDataBuilder() {
         titulo = "La Gioconda";
-        tipoObra = "REALISMO";
-        precio = 3400000L;
+        tipoObra = TipoObra.REALISMO.toString();
+        precio = 3600000L;
         vendido = false;
     }
 

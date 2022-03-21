@@ -8,7 +8,7 @@ import lombok.Getter;
 public class DtoObra {
     private Long id;
     private String titulo;
-    private String tipoObra;
+    private TipoObra tipoObra;
     private Long precio;
     private Boolean vendido;
 

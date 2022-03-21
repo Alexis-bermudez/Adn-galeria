@@ -1,5 +1,6 @@
 package com.ceiba.obra.modelo.entidad;
 
+import com.ceiba.obra.modelo.dto.TipoObra;
 import lombok.Getter;
 
 import static com.ceiba.dominio.ValidadorArgumento.validarObligatorio;
