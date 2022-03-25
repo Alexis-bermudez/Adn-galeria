@@ -1,3 +1,3 @@
 delete 
 from obra
-where id = :id
+where id = :id and vendido != true
